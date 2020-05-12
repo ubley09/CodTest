@@ -1,0 +1,42 @@
+.fa.fa-user.profile-icon {
+	font-size: 80px;
+	color: rgb(227, 227, 227);
+}
+
+.col.user-keys {
+	text-align: right;
+	margin-right: 10px;
+	font-weight: 600;
+}
+
+.row.user-data {
+	margin-bottom: 10px;
+	border-bottom: 1px solid #1d192f;
+	padding-bottom: 10px;
+	font-size: 18px;
+}
+
+.col.user-values {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.profile-data {
+	background-color: rgb(46, 42, 64);
+	padding: 50px;
+	border-radius: 7px;
+}
+
+.col.user-keys>p {
+	color: #d8a15a;
+}
+
+.col.profile-pic {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.register, .login {
+	background-color: #1f1730;
+	padding: 0;
+}
