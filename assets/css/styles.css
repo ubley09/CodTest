@@ -26,6 +26,7 @@ a {
 a:hover {
 	text-decoration: none;
 	color: #d8a15a;
+	cursor: pointer;
 }
 
 .container-small {

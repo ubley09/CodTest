@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
@@ -9,8 +9,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
 	<link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
 	<link rel="stylesheet" href="assets/css/profile.css">
 	<link rel="stylesheet" href="assets/css/styles.css">
@@ -26,30 +25,40 @@
 <body class="login">
 	<!-- Start: Login Form Dark -->
 	<div class="login-dark">
-		<form method="post" action="log_in.html">
+		<form method="POST" action="log_in.php" id="register_form">
 			<h2 class="sr-only">Login Form</h2>
 			<div class="illustration"><img src="assets/img/logo-orange.png">
 				<p>codtest</p>
 			</div>
-			<div class="form-group"><input class="form-control" type="text" name="first-name" placeholder="First name">
+			<div class="form-group">
+				<input class="form-control" type="text" name="first-name" id="first-name" placeholder="First name" autocomplete="off">
 			</div>
-			<div class="form-group"><input class="form-control" type="text" name="last-name" placeholder="Last name">
+			<div class="form-group">
+				<input class="form-control" type="text" name="last-name" id="last-name" placeholder="Last name" autocomplete="off">
 			</div>
-			<div class="form-group"><input class="form-control" type="text" name="user-name" placeholder="User name">
+			<div class="form-group">
+				<input class="form-control" type="text" name="user-name" id="user-name" placeholder="User name" autocomplete="off">
 			</div>
-			<div class="form-group"><input class="form-control" type="email" name="email" placeholder="E-mail"></div>
-			<div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password">
+			<div class="form-group">
+				<input class="form-control" type="email" name="email" id="email" placeholder="E-mail" autocomplete="off">
 			</div>
-			<div class="form-group"><input class="form-control" type="password" name="password-repeat"
-					placeholder="Password repeat"></div>
-			<div class="form-group"><button class="btn btn-primary btn-block" type="submit">REGISTER</button></div><a
-				class="forgot" href="log_in.html">Already registered? Log in here!</a>
+			<div class="form-group">
+				<input class="form-control" type="password" name="password" id="password" placeholder="Password" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="password" name="password-repeat" id="password-repeat" placeholder="Password repeat" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<input class="btn btn-primary btn-block" type="submit" value="REGISTER" name="register_bt">
+			</div>
+			<a class="forgot" href="log_in.php">Already registered? Log in here!</a>
 		</form>
 	</div>
 	<!-- End: Login Form Dark -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/bs-init.js"></script>
+
+	<script src="assets/js/register.js"></script>
 </body>
 
 </html>

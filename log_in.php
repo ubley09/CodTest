@@ -1,3 +1,7 @@
+<?php
+session_start();
+require 'assets/php/logout_p.php';
+?>
 <!DOCTYPE html>
 <html>
 
@@ -9,8 +13,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
 	<link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
 	<link rel="stylesheet" href="assets/css/profile.css">
 	<link rel="stylesheet" href="assets/css/styles.css">
@@ -26,22 +29,33 @@
 <body class="login">
 	<!-- Start: Login Form Dark -->
 	<div class="login-dark">
-		<form method="get" action="index.html">
+		<form method="POST" action="index.php">
 			<h2 class="sr-only">Login Form</h2>
 			<div class="illustration"><img src="assets/img/logo-orange.png">
 				<p>codtest</p>
 			</div>
-			<div class="form-group"><input class="form-control" type="text" name="user" placeholder="User"></div>
-			<div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password">
+			<div class="form-group">
+				<input class="form-control" type="text" name="user-name" placeholder="User" required>
 			</div>
-			<div class="form-group"><button class="btn btn-primary btn-block" type="submit">LOG IN</button></div><a
-				class="forgot" href="register.html">Don't have an account? Register here!</a>
+			<div class="form-group">
+				<input class="form-control" type="password" name="password" placeholder="Password" required>
+			</div>
+			<div class="form-group">
+				<input class="btn btn-primary btn-block" type="submit" name="login_bt" value="LOG IN">
+			</div>
+			<a class="forgot" href="register.php">Don't have an account? Register here!</a>
 		</form>
 	</div>
+
+	<?php
+	require 'assets/php/register_p.php';
+	require 'assets/php/login_p.php'; // login error
+	?>
+
 	<!-- End: Login Form Dark -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/bs-init.js"></script>
+
 </body>
 
 </html>
