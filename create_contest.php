@@ -55,33 +55,45 @@ require 'assets/php/session_check_p.php';
 		</div>
 	</nav>
 	<div class="container d-flex flex-column container-normal">
-		<form method="post">
+		<form method="post" action="my_contests.php" id="createContest_form">
 			<div class="form-row">
-				<div class="col"><input class="form-control input-text" type="text" id="write-title" placeholder="Write title..."></div>
+				<div class="col">
+					<input class="form-control input-text" type="text" id="write-title" placeholder="Write title..." name="cTitle" autocomplete="off">
+				</div>
 			</div>
 			<div class="form-row">
-				<div class="col"><textarea class="form-control input-text text-area" id="write-description" placeholder="Write contest description..." name="Contest description" spellcheck="true"></textarea></div>
+				<div class="col">
+					<textarea class="form-control input-text text-area" id="write-description" placeholder="Write contest description..." name="cDescription" spellcheck="true"></textarea>
+				</div>
 			</div>
 			<div class="form-row">
-				<div class="col d-lg-flex"><select class="custom-select" id="create-language">
+				<div class="col d-lg-flex">
+					<select class="custom-select" id="create-language" name="cLanguage">
 						<option value="undefined">Select a language</option>
-						<option value="java">Java</option>
-						<option value="c#">C#</option>
-						<option value="python">Python</option>
-					</select></div>
-				<div class="col flex-wrap"><select class="custom-select" id="create-difficulty">
+						<option value="Java">Java</option>
+						<option value="C#">C#</option>
+						<option value="Python">Python</option>
+					</select>
+				</div>
+				<div class="col flex-wrap">
+					<select class="custom-select" id="create-difficulty" name="cDifficulty">
 						<option value="undefined">Select difficulty</option>
-						<option value="easy">Easy</option>
-						<option value="normal">Normal</option>
-						<option value="hard">Hard</option>
-					</select></div>
-				<div class="col d-lg-flex justify-content-lg-end"><button class="btn btn-primary btn-block" type="button">CREATE</button></div>
+						<option value="Easy">Easy</option>
+						<option value="Normal">Normal</option>
+						<option value="Hard">Hard</option>
+					</select>
+				</div>
+				<div class="col d-lg-flex justify-content-lg-end">
+					<input class="btn btn-primary btn-block" type="submit" name="addContest_bt" value="CREATE">
+				</div>
 			</div>
 		</form>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/js/bs-init.js"></script>
+	
+	<script src="assets/js/createContest.js"></script>
 </body>
 
 </html>

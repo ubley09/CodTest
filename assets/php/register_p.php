@@ -4,7 +4,7 @@ require_once "db_config.php";
 
 if (isset($_POST["register_bt"])) {
 
-	if (insertNewUserToSql($connection, $_POST["first-name"], $_POST["last-name"], $_POST["user-name"], $_POST["email"], $_POST["password"])) {
+	if (insertNewUserToSql($connection,trim($_POST["first-name"]), trim($_POST["last-name"]), trim($_POST["user-name"]), trim($_POST["email"]), trim($_POST["password"]))) {
 		echo '<script language="javascript">';
 		echo 'alert("Successfully registered!")';
 		echo '</script>';

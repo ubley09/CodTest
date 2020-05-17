@@ -56,7 +56,8 @@ require 'assets/php/session_check_p.php';
 	</nav>
 	<div class="container d-flex flex-column container-large" id="my-contests-list">
 		<div class="row">
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+			<!-- SQL DATABASE OUTPUT -->
+			<!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
 				<div class="small-description">
 					<h1>My created contest title</h1>
 					<p>My created contest descriptions. My created contest descriptions. My created contest
@@ -77,117 +78,11 @@ require 'assets/php/session_check_p.php';
 					<p>Java</p><a data-toggle="tooltip" data-bs-tooltip="" href="solutions.php" title="Number of Solutions">0</a>
 					<p>Hard</p>
 				</div>
-			</div>
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-				<div class="small-description">
-					<h1>My created contest title</h1>
-					<p>My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. </p>
-				</div>
-				<div class="d-flex justify-content-between small-description-details">
-					<p>Java</p><a data-toggle="tooltip" data-bs-tooltip="" href="solutions.php" title="Number of Solutions">0</a>
-					<p>Hard</p>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-				<div class="small-description">
-					<h1>My created contest title</h1>
-					<p>My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. </p>
-				</div>
-				<div class="d-flex justify-content-between small-description-details">
-					<p>Java</p><a data-toggle="tooltip" data-bs-tooltip="" href="solutions.php" title="Number of Solutions">0</a>
-					<p>Hard</p>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-				<div class="small-description">
-					<h1>My created contest title</h1>
-					<p>My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. </p>
-				</div>
-				<div class="d-flex justify-content-between small-description-details">
-					<p>Java</p><a data-toggle="tooltip" data-bs-tooltip="" href="solutions.php" title="Number of Solutions">0</a>
-					<p>Hard</p>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-				<div class="small-description">
-					<h1>My created contest title</h1>
-					<p>My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. </p>
-				</div>
-				<div class="d-flex justify-content-between small-description-details">
-					<p>Java</p><a data-toggle="tooltip" data-bs-tooltip="" href="solutions.php" title="Number of Solutions">0</a>
-					<p>Hard</p>
-				</div>
-			</div>
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-				<div class="small-description">
-					<h1>My created contest title</h1>
-					<p>My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My
-						created contest descriptions. My created contest descriptions. </p>
-				</div>
-				<div class="d-flex justify-content-between small-description-details">
-					<p>Java</p><a data-toggle="tooltip" data-bs-tooltip="" href="solutions.php" title="Number of Solutions">0</a>
-					<p>Hard</p>
-				</div>
-			</div>
+			</div> -->
+			<!-- SQL DATABASE OUTPUT -->
+
+			<?php require 'assets/php/contests_p.php'; ?>
+
 		</div>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

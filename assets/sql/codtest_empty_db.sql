@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 16, 2020 at 04:20 PM
+-- Generation Time: May 17, 2020 at 02:32 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -31,8 +31,8 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `contests`;
 CREATE TABLE IF NOT EXISTS `contests` (
   `id_contest` int(9) NOT NULL AUTO_INCREMENT,
-  `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
   `language` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `difficulty` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
   `isclosed` tinyint(1) NOT NULL,
@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS `ratings` (
 DROP TABLE IF EXISTS `solutions`;
 CREATE TABLE IF NOT EXISTS `solutions` (
   `id_solution` int(9) NOT NULL AUTO_INCREMENT,
-  `solution` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `solution_description` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `solution` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `solution_description` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL,
   `isgood` tinyint(1) NOT NULL,
   `checked` tinyint(1) NOT NULL,
   `id_contest` int(9) NOT NULL,
