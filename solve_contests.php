@@ -56,27 +56,39 @@ require 'assets/php/session_check_p.php';
 	</nav>
 	<div class="container d-flex flex-column sort-contests" id="sorting-contests">
 		<p>Sort contests with programming language and difficulty</p>
-		<form method="get" action="sorted_solve_contest.php">
+		<form method="GET" id="sortContests_form" action="sorted_solve_contest.php">
 			<div class="form-row justify-content-around">
-				<div class="col-md-4"><select class="custom-select" id="sort-language">
+				<div class="col-md-4"><select class="custom-select" id="sort-language" name="sort-language">
 						<option value="undefined">Select a language</option>
-						<option value="java">Java</option>
-						<option value="c#">C#</option>
-						<option value="python">Python</option>
+						<option value="Java">Java</option>
+						<option value="C#">C#</option>
+						<option value="Python">Python</option>
 					</select></div>
-				<div class="col-md-4"><select class="custom-select" id="sort-difficulty">
+				<div class="col-md-4"><select class="custom-select" id="sort-difficulty" name="sort-difficulty">
 						<option value="undefined">Select difficulty</option>
-						<option value="easy">Easy</option>
-						<option value="normal">Normal</option>
-						<option value="hard">Hard</option>
+						<option value="Easy">Easy</option>
+						<option value="Normal">Normal</option>
+						<option value="Hard">Hard</option>
 					</select></div>
-				<div class="col-md-2"><button class="btn btn-primary btn-block" type="submit">SORT</button></div>
+				<div class="col-md-2">
+					<input class="btn btn-primary btn-block" type="submit" name="sortContest_bt" value="SORT">
+				</div>
 			</div>
 		</form>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/js/bs-init.js"></script>
+	<script>
+		if (<?php if (isset($_GET['end'])) {
+				echo $_GET['end'];
+			} else {
+				echo "0";
+			} ?> == 2) {
+			window.alert("There is no such contest");
+		}
+	</script>
+	<script src="assets/js/solveContests.js"></script>
 </body>
 
 </html>

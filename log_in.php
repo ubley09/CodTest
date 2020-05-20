@@ -35,7 +35,7 @@ require 'assets/php/logout_p.php';
 				<p>codtest</p>
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="user-name" placeholder="User" required>
+				<input class="form-control" type="text" name="user-name" placeholder="User" autofocus required>
 			</div>
 			<div class="form-group">
 				<input class="form-control" type="password" name="password" placeholder="Password" required>

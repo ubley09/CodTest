@@ -31,7 +31,7 @@
 				<p>codtest</p>
 			</div>
 			<div class="form-group">
-				<input class="form-control" type="text" name="first-name" id="first-name" placeholder="First name" autocomplete="off">
+				<input class="form-control" type="text" name="first-name" id="first-name" placeholder="First name" autocomplete="off" autofocus>
 			</div>
 			<div class="form-group">
 				<input class="form-control" type="text" name="last-name" id="last-name" placeholder="Last name" autocomplete="off">

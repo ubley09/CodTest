@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'assets/php/session_check_p.php';
+require 'assets/php/solve_contests_p.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,8 +13,11 @@ require 'assets/php/session_check_p.php';
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+	<link rel="stylesheet" href="assets/css/Custom-File-Upload.css">
 	<link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
 	<link rel="stylesheet" href="assets/css/profile.css">
 	<link rel="stylesheet" href="assets/css/styles.css">
@@ -53,56 +57,35 @@ require 'assets/php/session_check_p.php';
 			</div>
 		</div>
 	</nav>
-	<div class="next"><a href="#" title="Next contest"><i class="material-icons arrow-right" data-toggle="tooltip" data-bs-tooltip="" title="Next contest">keyboard_arrow_right</i></a></div>
+	<div class="next"><a href="#" title="Next contest" id="next-contest">
+			<i class="material-icons arrow-right" data-toggle="tooltip" data-bs-tooltip="" title="Next contest" id="icon">keyboard_arrow_right</i>
+		</a></div>
 	<div class="container d-flex flex-column container-large">
-		<form method="post">
-			<div class="form-row">
+		<form method="POST" action="sorted_solve_contest.php?
+		<?php echo "sort-language=" . ($_GET['sort-language'] == "C#" ? "C%23" : $_GET['sort-language']) . "&sort-difficulty=" . $_GET['sort-difficulty'] . "&sortContest_bt=" . $_GET['sortContest_bt'];
+		?>" id="solution_form" name="solution_form">
+			<div class="form-row d-flex flex-column flex-lg-row">
 				<div class="col">
 					<div id="sorted-contest-descript" class="description">
-						<h1>My created contest title</h1>
-						<p>My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions. My created contest descriptions. My
-							created contest descriptions. My created
-							contest descriptions. My created contest descriptions. My created contest descriptions. My
-							created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions. My created contest descriptions. My
-							created contest descriptions. My created contest descriptions. My created contest
-							descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.</p>
-						<p>Java / Hard</p>
+						<h1 id="contest-title"></h1>
+						<p id="contest-description"></p>
+						<p><span id="contest-language"></span> / <span id="contest-diffculty"></span></p>
 					</div>
 				</div>
 				<div class="col">
-					<div><textarea class="form-control input-text text-area" id="write-solution-comment" placeholder="Write comment..." name="Comment" spellcheck="true"></textarea></div>
+					<div><textarea class="form-control input-text text-area" id="write-solution-comment" name="Comment" placeholder="Write comment..." spellcheck="true"></textarea></div>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="col d-flex d-lg-flex flex-column justify-content-lg-end align-items-lg-end">
-					<p>Upload your solution</p><button class="btn btn-primary" type="button">UPLOAD</button>
+					<div class="text-right d-flex flex-row justify-content-end">
+						<label id="user_group_label" for="user_group_logo">
+							<i class="fas fa-upload"></i>&nbsp;<span id="file-label-text">Select your file...</span>
+						</label>
+						<input type="hidden" name="contest-id" id="contest-id" value="">
+						<input class="btn btn-primary" type="submit" name="solution_bt" value="UPLOAD">
+						<input type="file" id="user_group_logo" class="custom-file-input" accept=".txt" name="user_group_logo">
+					</div>
 				</div>
 			</div>
 		</form>
@@ -110,6 +93,11 @@ require 'assets/php/session_check_p.php';
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/js/bs-init.js"></script>
+	<script src="assets/js/Custom-File-Upload.js"></script>
+	<script>
+		var sortedContests = <?php echo json_encode($rngContestArr); ?>;
+	</script>
+	<script src="assets/js/sortedSolveContest.js"></script>
 </body>
 
 </html>
