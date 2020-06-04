@@ -39,7 +39,7 @@ function showUserContests($connection, $idUser)
 					</div>
 					<div class=\"d-flex justify-content-between small-description-details\">
 						<p>{$record['language']}</p>
-						<a data-toggle=\"tooltip\" data-bs-tooltip=\"\" href=\"solutions.php\" title=\"Number of Solutions\">{$record['solutions']}</a>
+						<a data-toggle=\"tooltip\" data-bs-tooltip=\"\" href=\"solutions.php?c={$record['id_contest']}\" title=\"Number of Solutions\">{$record['solutions']}</a>
 						<p>{$record['difficulty']}</p>
 					</div>
 				</div>";

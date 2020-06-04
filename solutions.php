@@ -54,94 +54,38 @@ require 'assets/php/session_check_p.php';
 			</div>
 		</div>
 	</nav>
+	<?php
+	require 'assets/php/solutions_p.php';
+	?>
 	<div class="container d-flex flex-column container-large">
-		<form action="best_solution.php" method="get">
-			<div class="form-row">
-				<div class="col">
-					<div id="sorted-contest-descript" class="description">
-						<h1>My created contest title</h1>
-						<p>My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.<br><br>My
-							created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions.&nbsp;<br><br>My created contest descriptions. My created
-							contest descriptions. My created contest descriptions. My created contest descriptions. My
-							created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions. My created contest descriptions. My
-							created contest descriptions. My created
-							contest descriptions. My created contest descriptions. My created contest descriptions. My
-							created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My
-							created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.
-							My created contest descriptions. My created contest descriptions. My created contest
-							descriptions. My created contest descriptions. My created contest descriptions. My created
-							contest descriptions. My created contest descriptions.&nbsp;<br></p>
-						<p>Java / Hard</p>
-					</div>
-				</div>
-				<div class="col">
-					<div class="form-row">
-						<div class="col-12">
-							<div class="d-flex d-xl-flex flex-column justify-content-between flex-lg-row align-items-lg-center flex-xl-row align-items-xl-center rating solutions">
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Name">Monica
-									Fish</p>
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Like">0</p>
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Dislike">0</p>
-								<button class="btn btn-primary" data-toggle="tooltip" data-bs-tooltip="" data-placement="left" type="submit" title="Check">CHECK THIS</button>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="d-flex d-xl-flex flex-column justify-content-between flex-lg-row align-items-lg-center flex-xl-row align-items-xl-center rating solutions">
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Name">Monica
-									Fish</p>
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Like">0</p>
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Dislike">0</p>
-								<button class="btn btn-primary" data-toggle="tooltip" data-bs-tooltip="" data-placement="left" type="button" title="Check">CHECK THIS</button>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="d-flex d-xl-flex flex-column justify-content-between flex-lg-row align-items-lg-center flex-xl-row align-items-xl-center rating solutions">
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Name">Monica
-									Fish</p>
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Like">0</p>
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Dislike">0</p>
-								<button class="btn btn-primary" data-toggle="tooltip" data-bs-tooltip="" data-placement="left" type="button" title="Check">CHECK THIS</button>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="d-flex d-xl-flex flex-column justify-content-between flex-lg-row align-items-lg-center flex-xl-row align-items-xl-center rating solutions">
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Name">Monica
-									Fish</p>
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Like">0</p>
-								<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Dislike">0</p>
-								<button class="btn btn-primary" data-toggle="tooltip" data-bs-tooltip="" data-placement="left" type="button" title="Check">CHECK THIS</button>
-							</div>
-						</div>
+		<div class="form-row">
+			<?php
+			if (!showUserContest($connection, $_SESSION['id_user'], $_GET['c'])) {
+				echo '<script language="javascript">';
+				echo 'alert("Something wrong!")';
+				echo '</script>';
+			}
+			?>
+			<div class="col">
+				<div class="form-row">
+					<div class="col-12" id="solutions-container">
+						<?php
+						if (!showContestSolutions($connection, $_SESSION['id_user'], $_GET['c'])) {
+							echo '<script language="javascript">';
+							echo 'alert("Something wrong!")';
+							echo '</script>';
+						}
+						?>
 					</div>
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/js/bs-init.js"></script>
+
+	<script src="assets/js/solutions.js"></script>
 </body>
 
 </html>

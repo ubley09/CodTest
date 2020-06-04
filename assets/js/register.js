@@ -137,7 +137,7 @@ var testUserName = function (user_name) {
 };
 
 var testLastName = function (last_name) {
-	let rex = /^[A-Z][a-z]{2,}$/; // Begin with 1 uppercase letter, and continues with lowercase leters with min 3 character.
+	let rex = /^[A-Z][a-z]{2,}$/;
 	if (last_name.value.trim() == '') {
 		errormsg = "The last name field is required!";
 	} else if (!rex.test(last_name.value.trim())) {
@@ -149,7 +149,7 @@ var testLastName = function (last_name) {
 };
 
 var testFirstName = function (first_name) {
-	let rex = /^[A-Z][a-z]{2,}$/; // Begin with 1 uppercase letter, and continues with lowercase leters with min 3 character.
+	let rex = /^[A-Z][a-z]{2,}$/;
 	if (first_name.value.trim() == '') {
 		errormsg = "The first name field is required!";
 	} else if (!rex.test(first_name.value.trim())) {

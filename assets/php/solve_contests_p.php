@@ -34,8 +34,8 @@ function rngSortContests($connection, $language, $difficulty, $user)
 
 function insertSolutionToSql($connection, $id_contest, $solution, $description, $user)
 {
-	$sql = "INSERT INTO solutions (id_solution, solution, solution_description, isgood, checked, id_contest, id_user)
-	VALUES (NULL, \"$solution\", \"$description\", 0, 0, $id_contest, \"$user\")";
+	$sql = "INSERT INTO solutions (id_solution, solution, solution_description, solution_state, id_contest, id_user)
+	VALUES (NULL, \"$solution\", \"$description\", 0, $id_contest, \"$user\")";
 	if (mysqli_query($connection, $sql)) {
 	} else {
 		die("Error: " . mysqli_error($connection));

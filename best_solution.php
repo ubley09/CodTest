@@ -77,11 +77,6 @@ require 'assets/php/session_check_p.php';
 					</div>
 				</div>
 			</div>
-			<div class="form-row">
-				<div class="col-xl-4 offset-2 d-flex justify-content-between">
-					<p>Rate checker user</p><a href="#"><i class="fa fa-thumbs-up rating-icon"></i></a><a href="#"><i class="fa fa-thumbs-down rating-icon"></i></a>
-				</div>
-			</div>
 		</form>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

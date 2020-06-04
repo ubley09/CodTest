@@ -4,7 +4,7 @@ require_once "db_config.php";
 
 if (isset($_POST["register_bt"])) {
 
-	if (insertNewUserToSql($connection,trim($_POST["first-name"]), trim($_POST["last-name"]), trim($_POST["user-name"]), trim($_POST["email"]), trim($_POST["password"]))) {
+	if (insertNewUserToSql($connection, trim($_POST["first-name"]), trim($_POST["last-name"]), trim($_POST["user-name"]), trim($_POST["email"]), trim($_POST["password"]))) {
 		echo '<script language="javascript">';
 		echo 'alert("Successfully registered!")';
 		echo '</script>';
@@ -28,18 +28,9 @@ function insertNewUserToSql($connection, $first_name, $last_name, $user_name, $e
 		define("SALT1", "X48z2dWpTSSm");
 		define("SALT2", "GB7tgL5GpLFS3jD");
 		$password = sha1(SALT1 . $password . SALT2);
-		$sql = "INSERT INTO users (id_user, username, password, firstname, lastname, email)
-				VALUES (NULL, \"$user_name\", \"$password\", \"$first_name\", \"$last_name\", \"$email\")";
+		$sql = "CALL new_user(\"$user_name\", \"$password\", \"$first_name\", \"$last_name\", \"$email\")";
 		if (mysqli_query($connection, $sql)) {
-			$last_id = mysqli_insert_id($connection);
-			$sql = "INSERT INTO ratings (likes, dislikes, id_user)
-			VALUES (0, 0, $last_id)";
-			if (mysqli_query($connection, $sql))
-				return true;
-			else {
-				die("Error: " . mysqli_error($connection));
-				return false;
-			}
+			return true;
 		} else {
 			die("Error: " . mysqli_error($connection));
 			return false;
