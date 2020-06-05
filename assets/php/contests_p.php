@@ -5,18 +5,18 @@ if (isset($_POST['addContest_bt'])) {
 
 	if (insertNewContestToSql($connection, trim($_POST['cTitle']), trim($_POST['cDescription']), $_POST['cLanguage'], $_POST['cDifficulty'])) {
 		echo '<script language="javascript">';
-		echo 'alert("Successfully added the contest!")';
+		echo 'show_toast("Successfully added the contest!")';
 		echo '</script>';
 	} else {
 		echo '<script language="javascript">';
-		echo 'alert("Something wrong!")';
+		echo 'show_toast("Something wrong!")';
 		echo '</script>';
 	}
 }
 
 if (!showUserContests($connection, $_SESSION['id_user'])) {
 	echo '<script language="javascript">';
-	echo 'alert("Something wrong!")';
+	echo 'show_toast("Something wrong!")';
 	echo '</script>';
 }
 

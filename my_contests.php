@@ -27,6 +27,8 @@ require 'assets/php/session_check_p.php';
 </head>
 
 <body>
+	<div id="snackbar">Some text some message..</div>
+	<script src="assets/js/toast.js"></script>
 	<nav class="navbar navbar-light navbar-expand-md fixed-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" data-toggle="tooltip" data-bs-tooltip="" href="index.php" title="Home">

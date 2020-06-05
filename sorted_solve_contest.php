@@ -31,6 +31,8 @@ require 'assets/php/solve_contests_p.php';
 </head>
 
 <body>
+	<div id="snackbar">Some text some message..</div>
+	<script src="assets/js/toast.js"></script>
 	<nav class="navbar navbar-light navbar-expand-md fixed-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" data-toggle="tooltip" data-bs-tooltip="" href="index.php" title="Home">
@@ -61,9 +63,7 @@ require 'assets/php/solve_contests_p.php';
 			<i class="material-icons arrow-right" data-toggle="tooltip" data-bs-tooltip="" title="Next contest" id="icon">keyboard_arrow_right</i>
 		</a></div>
 	<div class="container d-flex flex-column container-large">
-		<form method="POST" action="sorted_solve_contest.php?
-		<?php echo "sort-language=" . ($_GET['sort-language'] == "C#" ? "C%23" : $_GET['sort-language']) . "&sort-difficulty=" . $_GET['sort-difficulty'] . "&sortContest_bt=" . $_GET['sortContest_bt'];
-		?>" id="solution_form" name="solution_form">
+		<form method="POST" enctype="multipart/form-data" action="sorted_solve_contest.php" id="solution_form" name="solution_form">
 			<div class="form-row d-flex flex-column flex-lg-row">
 				<div class="col">
 					<div id="sorted-contest-descript" class="description">
@@ -83,7 +83,7 @@ require 'assets/php/solve_contests_p.php';
 							<i class="fas fa-upload"></i>&nbsp;<span id="file-label-text">Select your file...</span>
 						</label>
 						<input type="hidden" name="contest-id" id="contest-id" value="">
-						<input class="btn btn-primary" type="submit" name="solution_bt" value="UPLOAD">
+						<input class="btn btn-primary" type="submit" name="solution_bt" id="sbutton" value="UPLOAD">
 						<input type="file" id="user_group_logo" class="custom-file-input" accept=".txt" name="user_group_logo">
 					</div>
 				</div>

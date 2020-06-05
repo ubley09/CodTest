@@ -6,11 +6,11 @@ if (isset($_POST["register_bt"])) {
 
 	if (insertNewUserToSql($connection, trim($_POST["first-name"]), trim($_POST["last-name"]), trim($_POST["user-name"]), trim($_POST["email"]), trim($_POST["password"]))) {
 		echo '<script language="javascript">';
-		echo 'alert("Successfully registered!")';
+		echo 'show_toast("Successfully registered!");';
 		echo '</script>';
 	} else {
 		echo '<script language="javascript">';
-		echo 'alert("Something wrong!")';
+		echo 'show_toast("Something wrong!");';
 		echo '</script>';
 	}
 }

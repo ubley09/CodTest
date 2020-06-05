@@ -4,7 +4,7 @@ let errormsg = null;
 let i = 0;
 let arrLength = sortedContests.length;
 
-jQuery(document).ready(function () { 
+jQuery(document).ready(function () {
 	if (arrLength == 1) {
 		changeTooltip(false);
 	}
@@ -13,6 +13,8 @@ jQuery(document).ready(function () {
 let $ = function (id) {
 	return document.getElementById(id);
 };
+
+
 window.addEventListener('load', function () {
 	if (arrLength == 0) {
 		window.location.href = 'solve_contests.php?end=2';
@@ -24,27 +26,34 @@ window.addEventListener('load', function () {
 	}
 	$('next-contest').addEventListener('click', function (e) {
 		e.preventDefault();
-		$('solution_form').reset();
-		$('file-label-text').innerHTML = "Select your file...";
-		$('user_group_label').style.borderColor = "#d8a15a";
-		i++;
-		if (i < arrLength - 1) {
-			showContest(i);
-		} else if (i < arrLength) {
-			showContest(i);
-			$('icon').innerHTML = "check";
-			changeTooltip(true);
-		} else {
-			window.location.href = 'solve_contests.php?end=1';
-		}
+		nextContest();
 	});
 	$('solution_form').addEventListener('submit', function (e) {
+		e.preventDefault();
 		if (!checkForm()) {
-			e.preventDefault();
-			window.alert(errormsg);
+			show_toast(errormsg);
+		} else {
+			sendSolution();
 		}
 	});
 });
+
+function nextContest() {
+	$('solution_form').reset();
+	$('file-label-text').innerHTML = "Select your file...";
+	$('user_group_label').style.borderColor = "#d8a15a";
+	$('sbutton').value = "UPLOAD";
+	i++;
+	if (i < arrLength - 1) {
+		showContest(i);
+	} else if (i < arrLength) {
+		showContest(i);
+		$('icon').innerHTML = "check";
+		changeTooltip(true);
+	} else {
+		window.location.href = 'solve_contests.php?end=1';
+	}
+}
 
 function showContest(i) {
 	$('contest-id').value = sortedContests[i].id_contest;
@@ -75,10 +84,34 @@ var checkForm = function () {
 };
 
 var testFile = function (file) {
-	if (file.value.trim() == ""){
+	if (file.value.trim() == "") {
 		errormsg = "Must choose a file!";
 	} else {
 		return true;
 	}
 	return false;
+};
+
+var sendSolution = function () {
+	var form = document.getElementById('solution_form');
+	var formData = new FormData(form);
+
+	$('user_group_label').style.borderColor = "#ff0";
+	$('sbutton').value = "WAIT";
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			let rText = this.responseText;
+			if (rText == "OK") {
+				nextContest();
+				show_toast("Solution successfully send!");
+			} else {
+				show_toast(rText);
+				$('user_group_label').style.borderColor = "#f00";
+				$('sbutton').value = "UPLOAD";
+			}
+		}
+	};
+	xmlhttp.open("POST", "assets/php/solve_contests_p.php", true);
+	xmlhttp.send(formData);
 };

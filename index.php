@@ -1,9 +1,3 @@
-<?php
-session_start();
-require 'assets/php/login_p.php';
-require 'assets/php/session_check_p.php';
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -29,6 +23,13 @@ require 'assets/php/session_check_p.php';
 </head>
 
 <body>
+	<div id="snackbar">Some text some message..</div>
+	<script src="assets/js/toast.js"></script>
+	<?php
+	session_start();
+	require 'assets/php/login_p.php';
+	require 'assets/php/session_check_p.php';
+	?>
 	<nav class="navbar navbar-light navbar-expand-md fixed-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" title="Home">
@@ -94,7 +95,6 @@ require 'assets/php/session_check_p.php';
 			</div>
 		</div>
 	</div>
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/js/bs-init.js"></script>

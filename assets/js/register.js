@@ -18,7 +18,7 @@ window.addEventListener('load', function () {
 	$('register_form').addEventListener('submit', function (e) {
 		if (!checkForm()) {
 			e.preventDefault();
-			window.alert(errormsg);
+			show_toast(errormsg);
 		}
 	});
 });

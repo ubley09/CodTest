@@ -9,7 +9,7 @@ window.addEventListener('load', function () {
 	$('createContest_form').addEventListener('submit', function (e) {
 		if (!checkForm()) {
 			e.preventDefault();
-			window.alert(errormsg);
+			show_toast(errormsg);
 		}
 	});
 });

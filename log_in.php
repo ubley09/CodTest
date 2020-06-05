@@ -1,7 +1,3 @@
-<?php
-session_start();
-require 'assets/php/logout_p.php';
-?>
 <!DOCTYPE html>
 <html>
 
@@ -27,6 +23,12 @@ require 'assets/php/logout_p.php';
 </head>
 
 <body class="login">
+	<div id="snackbar">Some text some message..</div>
+	<script src="assets/js/toast.js"></script>
+	<?php
+	session_start();
+	require 'assets/php/logout_p.php';
+	?>
 	<!-- Start: Login Form Dark -->
 	<div class="login-dark">
 		<form method="POST" action="index.php">

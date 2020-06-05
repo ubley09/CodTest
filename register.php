@@ -23,6 +23,8 @@
 </head>
 
 <body class="login">
+	<div id="snackbar">Some text some message..</div>
+	<script src="assets/js/toast.js"></script>
 	<!-- Start: Login Form Dark -->
 	<div class="login-dark">
 		<form method="POST" action="log_in.php" id="register_form">
@@ -57,7 +59,7 @@
 	<!-- End: Login Form Dark -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-	
+
 	<script src="assets/js/register.js"></script>
 </body>
 

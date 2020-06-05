@@ -27,6 +27,8 @@ require 'assets/php/session_check_p.php';
 </head>
 
 <body>
+	<div id="snackbar">Some text some message..</div>
+	<script src="assets/js/toast.js"></script>
 	<nav class="navbar navbar-light navbar-expand-md fixed-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" data-toggle="tooltip" data-bs-tooltip="" href="index.php" title="Home">
@@ -62,7 +64,7 @@ require 'assets/php/session_check_p.php';
 			<?php
 			if (!showUserContest($connection, $_SESSION['id_user'], $_GET['c'])) {
 				echo '<script language="javascript">';
-				echo 'alert("Something wrong!")';
+				echo 'show_toast("Something wrong!")';
 				echo '</script>';
 			}
 			?>
@@ -72,7 +74,7 @@ require 'assets/php/session_check_p.php';
 						<?php
 						if (!showContestSolutions($connection, $_SESSION['id_user'], $_GET['c'])) {
 							echo '<script language="javascript">';
-							echo 'alert("Something wrong!")';
+							echo 'show_toast("Something wrong!")';
 							echo '</script>';
 						}
 						?>
@@ -81,6 +83,7 @@ require 'assets/php/session_check_p.php';
 			</div>
 		</div>
 	</div>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/js/bs-init.js"></script>

@@ -33,7 +33,7 @@ function showContestSolutions($connection, $idUser, $idContest)
 	while ($record = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		echo "	<form action=\"best_solution.php\" method=\"GET\" id=\"form_{$record['id_solution']}\">
 				<div class=\"d-flex d-xl-flex flex-column justify-content-between flex-lg-row align-items-lg-center flex-xl-row align-items-xl-center rating solutions\">
-					<p data-toggle=\"tooltip\" data-bs-tooltip=\"\" data-placement=\"left\" title=\"Name\">{$record['firstname']} {$record['lastname']}</p>
+					<p data-toggle=\"tooltip\" data-bs-tooltip=\"\" data-placement=\"left\" id=\"full-name\" title=\"Name\">{$record['firstname']} {$record['lastname']}</p>
 					<p data-toggle=\"tooltip\" data-bs-tooltip=\"\" data-placement=\"left\" title=\"Like\">{$record['likes']}</p>
 					<p data-toggle=\"tooltip\" data-bs-tooltip=\"\" data-placement=\"left\" title=\"Dislike\">{$record['dislikes']}</p>
 					<input type=\"hidden\" name=\"solution_state\" id=\"ss_{$record['id_solution']}\" value=\"{$record['solution_state']}\">
@@ -48,7 +48,7 @@ if (isset($_GET['cc'])) {
 	session_start();
 	if (!showContestSolutions($connection, $_SESSION['id_user'], $_GET['cc'])) {
 		echo '<script language="javascript">';
-		echo 'alert("Something wrong!")';
+		echo 'show_toast("Something wrong!");';
 		echo '</script>';
 	}
 
@@ -57,6 +57,11 @@ if (isset($_GET['ss'])) {
 	$sql = "CALL change_solution_state({$_GET['ss']})";
 	$result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 	$record = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+	if ($record['state'] == 2) {
+		$target_dir = "../files/";
+
+	}
 
 	exit($record['state']);
 }

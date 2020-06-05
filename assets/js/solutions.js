@@ -91,7 +91,6 @@ var change_formStyle = function (id) {
 				console.log(forms[id]);
 				break;
 		}
-
 	}
 };
 
@@ -106,6 +105,7 @@ var solutionStatechange = function (id) {
 				forms[id][0].value = rText;
 				change_formStyle(id);
 			} else if (rText == "2") {
+				show_toast(document.querySelector("#" + forms[id].id + " div p").innerHTML + " solution is removed!");
 				forms[id].innerHTML = "";
 			} else {
 				forms[id][1].innerHTML = "ERROR";

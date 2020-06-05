@@ -49,3 +49,28 @@ BEGIN
 
 END//
 DELIMITER ;
+
+-- insert_solution
+
+DROP PROCEDURE IF EXISTS insert_solution;
+DELIMITER //
+CREATE PROCEDURE insert_solution(solution_description_p VARCHAR(1024), id_contest_p INT(9), id_user_p INT(9))
+BEGIN
+
+	DECLARE lastinsertid INT(9);
+
+	INSERT INTO solutions (solution, solution_description, solution_state, id_contest, id_user)
+		VALUES ("null", solution_description_p, 0, id_contest_p, id_user_p);
+
+	SELECT LAST_INSERT_ID() INTO lastinsertid;
+
+	UPDATE solutions
+			SET solution = CONCAT("code", lastinsertid, ".txt")
+			WHERE id_solution = lastinsertid;
+
+	SELECT solution FROM solutions
+	WHERE id_solution = lastinsertid;
+
+
+END//
+DELIMITER ;
