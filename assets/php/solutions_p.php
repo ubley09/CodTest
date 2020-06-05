@@ -60,7 +60,7 @@ if (isset($_GET['ss'])) {
 
 	if ($record['state'] == 2) {
 		$target_dir = "../files/";
-
+		unlink($target_dir."code".$_GET['ss'].".txt");
 	}
 
 	exit($record['state']);
