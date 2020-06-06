@@ -28,6 +28,7 @@
 	<?php
 	session_start();
 	require 'assets/php/login_p.php';
+	require 'assets/php/index_p.php';
 	require 'assets/php/session_check_p.php';
 	?>
 	<nav class="navbar navbar-light navbar-expand-md fixed-top">

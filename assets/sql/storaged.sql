@@ -74,3 +74,34 @@ BEGIN
 
 END//
 DELIMITER ;
+
+-- solution_check
+
+DROP PROCEDURE IF EXISTS solution_check;
+DELIMITER //
+CREATE PROCEDURE solution_check(id_solution_p INT(9), solution_state_p TINYINT(1))
+BEGIN
+
+	DECLARE userid INT(9);
+
+	UPDATE solutions
+		SET solution_state = solution_state_p
+		WHERE id_solution = id_solution_p;
+
+	SELECT id_user INTO userid
+		FROM solutions
+		WHERE id_solution = id_solution_p;
+
+	IF solution_state_p = 2 THEN
+		UPDATE ratings
+			SET dislikes = dislikes + 1
+			WHERE id_user = userid;
+	ELSEIF solution_state_p = 3 THEN
+		UPDATE ratings
+			SET likes = likes + 1
+			WHERE id_user = userid;
+	END IF;
+
+END//
+DELIMITER ;
+

@@ -70,15 +70,7 @@ require 'assets/php/session_check_p.php';
 			?>
 			<div class="col">
 				<div class="form-row">
-					<div class="col-12" id="solutions-container">
-						<?php
-						if (!showContestSolutions($connection, $_SESSION['id_user'], $_GET['c'])) {
-							echo '<script language="javascript">';
-							echo 'show_toast("Something wrong!")';
-							echo '</script>';
-						}
-						?>
-					</div>
+					<div class="col-12" id="solutions-container"></div>
 				</div>
 			</div>
 		</div>

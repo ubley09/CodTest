@@ -60,7 +60,7 @@ function showContest(i) {
 	$('contest-title').innerHTML = sortedContests[i].title;
 	$('contest-description').innerHTML = sortedContests[i].description;
 	$('contest-language').innerHTML = sortedContests[i].language;
-	$('contest-diffculty').innerHTML = sortedContests[i].difficulty;
+	$('contest-difficulty').innerHTML = sortedContests[i].difficulty;
 }
 
 function changeTooltip(isShow) {

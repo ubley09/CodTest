@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'assets/php/session_check_p.php';
+require_once 'assets/php/db_config.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,46 +57,16 @@ require 'assets/php/session_check_p.php';
 			</div>
 		</div>
 	</nav>
-	<div id="next-solution" class="next"><a href="#" title="Next solution"><i class="material-icons arrow-right" data-toggle="tooltip" data-bs-tooltip="" title="Next solution">keyboard_arrow_right</i></a></div>
+	<div id="next-solution" class="next"><a href="" title="Next solution" id="next-solution">
+		<i class="material-icons arrow-right" data-toggle="tooltip" data-bs-tooltip="" title="Next solution" id="icon">keyboard_arrow_right</i>
+	</a></div>
 	<div class="container d-flex flex-column container-big" id="solutions">
 		<div class="row">
 			<div class="col-lg-12">
 				<div id="solution-description" class="description">
-					<h1>My created contest title</h1>
-					<p>My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. My created contest descriptions.
-						My created contest descriptions. My created contest descriptions. My created contest
-						descriptions. My created contest descriptions. My created contest descriptions. My created
-						contest descriptions. <br></p>
-					<p>Java / Hard</p>
+					<h1 id="contest-title"></h1>
+					<p id="contest-description"></p>
+					<p><span id="contest-language"></span> / <span id="contest-difficulty"></span></p>
 				</div>
 			</div>
 		</div>
@@ -103,17 +74,36 @@ require 'assets/php/session_check_p.php';
 			<div class="col-md-8">
 				<p style="margin-bottom: 10px;">Rate solution user</p>
 				<div class="d-flex d-xl-flex flex-row justify-content-between align-items-xl-center rating">
-					<p id="solution-user">Monica Fish</p><a href="#"><i class="fa fa-thumbs-up rating-icon"></i></a><a href="#"><i class="fa fa-thumbs-down rating-icon"></i></a>
+					<p id="solution-user"></p>
+					<a href="" id="like"><i class="fa fa-thumbs-up rating-icon"></i></a>
+					<a href="" id="dislike"><i class="fa fa-thumbs-down rating-icon"></i></a>
 				</div>
 			</div>
 			<div class="col-md-4 d-flex flex-column align-items-md-end">
-				<p style="margin-bottom: 10px;">Download solution</p><button class="btn btn-primary btn-block" type="button">DOWNLOAD</button>
+				<p style="margin-bottom: 10px;">Download solution</p>
+				<button class="btn btn-primary btn-block" type="button" id="download-button">DOWNLOAD</button>
 			</div>
 		</div>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/js/bs-init.js"></script>
+	<?php
+	$sql = "SELECT
+		solutions.id_solution, solutions.solution, contests.title, contests.description, contests.language, contests.difficulty, users.firstname, users.lastname
+		FROM solutions
+		JOIN contests ON contests.id_contest = solutions.id_contest
+		JOIN users ON users.id_user = solutions.id_user
+		WHERE solutions.solution_state = 1 AND contests.isclosed = 0 AND solutions.id_user != {$_SESSION['id_user']} AND contests.id_user != {$_SESSION['id_user']}
+		ORDER BY RAND()";
+	$result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
+	$rngSolutiontArr = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	?>
+	<script>
+		var sortedSolutions = <?php echo json_encode($rngSolutiontArr); ?>;
+	</script>
+	<script src="assets/js/checkSolutions.js"></script>
+
 </body>
 
 </html>

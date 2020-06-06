@@ -83,12 +83,15 @@ require 'assets/php/session_check_p.php';
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/js/bs-init.js"></script>
 	<script>
-		if (<?php if (isset($_GET['end'])) {
-				echo $_GET['end'];
-			} else {
-				echo "0";
-			} ?> == 2) {
-			show_toast("There is no such contest");
+		let end = <?php if (isset($_GET['end'])) {
+						echo $_GET['end'];
+					} else {
+						echo "0";
+					} ?>;
+		if (end == 2) {
+			show_toast("There is no such contest!");
+		} else if (end == 1) {
+			show_toast("No more contest!");
 		}
 	</script>
 	<script src="assets/js/solveContests.js"></script>

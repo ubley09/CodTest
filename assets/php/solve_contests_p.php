@@ -60,6 +60,7 @@ function insertSolutionToSql($connection, $id_contest, $description, $user)
 		$sql = "CALL insert_solution(\"{$description}\", {$id_contest}, {$user})";
 		$result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 		$record = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		
 
 		if (move_uploaded_file($_FILES["user_group_logo"]["tmp_name"], $target_dir . $record['solution'])) {
 			return true;

@@ -6,13 +6,15 @@ var $ = function (id) {
 
 let forms;
 let timer;
+let jsonArrText = "";
 
 window.addEventListener('load', function () {
+	forms = document.querySelectorAll("#solutions-container form");
 	solutionsRefresh();
 });
 
 var loadSolutions = function () {
-	forms = document.querySelectorAll("form");
+	forms = document.querySelectorAll("#solutions-container form");
 	change_formStyle(-1);
 	for (let i = 0; i < forms.length; i++) {
 		forms[i].addEventListener('submit', function (e) {
@@ -68,6 +70,7 @@ var change_formStyle = function (id) {
 					break;
 			}
 		}
+		jQuery('[data-bs-tooltip]').tooltip();
 	} else {
 		switch (forms[id][0].value) {
 			case "0":
@@ -127,12 +130,36 @@ var solutionsRefresh = function () {
 	xmlhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
 			let rText = this.responseText;
-			$('solutions-container').innerHTML = rText;
-			loadSolutions();
+			if (jsonArrText != rText) {
+				jsonArrText = rText;
+				let jsonObj = JSON.parse(jsonArrText);
+				buildSolutionForms(jsonObj);
+				loadSolutions();
+			} else {
+				timer = window.setTimeout(solutionsRefresh, 3000);
+			}
 		}
 	};
 	xmlhttp.open("GET", "assets/php/solutions_p.php?cc=" + $('contest-id').innerHTML, true);
 	xmlhttp.send();
 };
 
+var buildSolutionForms = function (jsonArr) {
+	let solutionFormsStr = "";
+	for (let j = 0; j < jsonArr.length; j++) {
+		solutionFormsStr +=
+			`<form action="best_solution.php" method="GET" id="form_${jsonArr[j].id_solution}">\n
+			<div class="d-flex d-xl-flex flex-column justify-content-between flex-lg-row align-items-lg-center flex-xl-row align-items-xl-center rating solutions">
+				<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" id="full-name" title="Name">${jsonArr[j].firstname} ${jsonArr[j].lastname}</p>
+				<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Like">${jsonArr[j].likes}</p>
+				<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Dislike">${jsonArr[j].dislikes}</p>
+				<input type="hidden" name="solution_state" id="ss_${jsonArr[j].id_solution}" value="${jsonArr[j].solution_state}">
+				<button class="btn btn-primary" type="submit" name="s" value="${jsonArr[j].id_solution}">CHECK THIS</button>
+			</div>
+			</form>`;
+
+	}
+	$('solutions-container').innerHTML = solutionFormsStr;
+
+};
 

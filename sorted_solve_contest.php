@@ -69,7 +69,7 @@ require 'assets/php/solve_contests_p.php';
 					<div id="sorted-contest-descript" class="description">
 						<h1 id="contest-title"></h1>
 						<p id="contest-description"></p>
-						<p><span id="contest-language"></span> / <span id="contest-diffculty"></span></p>
+						<p><span id="contest-language"></span> / <span id="contest-difficulty"></span></p>
 					</div>
 				</div>
 				<div class="col">

@@ -30,18 +30,9 @@ function showContestSolutions($connection, $idUser, $idContest)
 			JOIN ratings ON ratings.id_user = solutions.id_user
 			WHERE contests.id_user = $idUser AND contests.id_contest = $idContest";
 	$result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
-	while ($record = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-		echo "	<form action=\"best_solution.php\" method=\"GET\" id=\"form_{$record['id_solution']}\">
-				<div class=\"d-flex d-xl-flex flex-column justify-content-between flex-lg-row align-items-lg-center flex-xl-row align-items-xl-center rating solutions\">
-					<p data-toggle=\"tooltip\" data-bs-tooltip=\"\" data-placement=\"left\" id=\"full-name\" title=\"Name\">{$record['firstname']} {$record['lastname']}</p>
-					<p data-toggle=\"tooltip\" data-bs-tooltip=\"\" data-placement=\"left\" title=\"Like\">{$record['likes']}</p>
-					<p data-toggle=\"tooltip\" data-bs-tooltip=\"\" data-placement=\"left\" title=\"Dislike\">{$record['dislikes']}</p>
-					<input type=\"hidden\" name=\"solution_state\" id=\"ss_{$record['id_solution']}\" value=\"{$record['solution_state']}\">
-					<button class=\"btn btn-primary\" type=\"submit\" name=\"s\" value=\"{$record['id_solution']}\">CHECK THIS</button>
-				</div>
-				</form>";
-	}
-
+	$solutionArr = mysqli_fetch_all($result, MYSQLI_ASSOC);
+	
+	exit(json_encode($solutionArr));
 	return true;
 }
 if (isset($_GET['cc'])) {
