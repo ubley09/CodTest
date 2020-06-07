@@ -12,8 +12,11 @@ require 'assets/php/session_check_p.php';
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+	<link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+	<link rel="stylesheet" href="assets/css/Custom-File-Upload.css">
 	<link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
 	<link rel="stylesheet" href="assets/css/profile.css">
 	<link rel="stylesheet" href="assets/css/styles.css">
@@ -60,14 +63,18 @@ require 'assets/php/session_check_p.php';
 	require 'assets/php/solutions_p.php';
 	?>
 	<div class="container d-flex flex-column container-large">
-		<div class="form-row">
-			<?php
-			if (!showUserContest($connection, $_SESSION['id_user'], $_GET['c'])) {
-				echo '<script language="javascript">';
-				echo 'show_toast("Something wrong!")';
-				echo '</script>';
-			}
-			?>
+		<div class="form-row d-flex flex-column flex-md-row flex-lg-row">
+			<div class="col">
+				<?php
+				if (isset($_GET['c'])) {
+					if (!showUserContest($connection, $_SESSION['id_user'], $_GET['c'])) {
+						header('Location: index.php?nosolution=1');
+					}
+				} else {
+					header('Location: index.php?nosolution=1');
+				}
+				?>
+			</div>
 			<div class="col">
 				<div class="form-row">
 					<div class="col-12" id="solutions-container"></div>
@@ -78,6 +85,7 @@ require 'assets/php/session_check_p.php';
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 	<script src="assets/js/bs-init.js"></script>
 
 	<script src="assets/js/solutions.js"></script>

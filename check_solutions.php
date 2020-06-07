@@ -58,8 +58,8 @@ require_once 'assets/php/db_config.php';
 		</div>
 	</nav>
 	<div id="next-solution" class="next"><a href="" title="Next solution" id="next-solution">
-		<i class="material-icons arrow-right" data-toggle="tooltip" data-bs-tooltip="" title="Next solution" id="icon">keyboard_arrow_right</i>
-	</a></div>
+			<i class="material-icons arrow-right" data-toggle="tooltip" data-bs-tooltip="" title="Next solution" id="icon">keyboard_arrow_right</i>
+		</a></div>
 	<div class="container d-flex flex-column container-big" id="solutions">
 		<div class="row">
 			<div class="col-lg-12">

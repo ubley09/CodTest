@@ -9,6 +9,12 @@ let timer;
 let jsonArr = {};
 
 window.addEventListener('load', function () {
+	$('isclosed-cb').addEventListener('click', function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		isClosedChange();
+	});
 	forms = document.querySelectorAll("#solutions-container form");
 	solutionsRefresh();
 });
@@ -166,4 +172,24 @@ var buildSolutionForms = function () {
 
 };
 
-
+var isClosedChange = function () {
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			let rText = this.responseText;
+			if (rText = "OK") {
+				if ($('isclosed-cb').checked == true) {
+					$('isclosed-cb').checked = false;
+					show_toast("Your contest is now open!");
+				} else {
+					$('isclosed-cb').checked = true;
+					show_toast("Your contest is now closed!");
+				}
+			} else {
+				show_toast("ERROR: " + rText);
+			}
+		}
+	};
+	xmlhttp.open("GET", "assets/php/solutions_p.php?ci=" + $('contest-id').innerHTML + "&ic=1", true);
+	xmlhttp.send();
+};

@@ -29,6 +29,10 @@ require 'assets/php/session_check_p.php';
 <body>
 	<div id="snackbar">Some text some message..</div>
 	<script src="assets/js/toast.js"></script>
+	<?php
+	$file = "";
+	require 'assets/php/best_solution_p.php';
+	?>
 	<nav class="navbar navbar-light navbar-expand-md fixed-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" data-toggle="tooltip" data-bs-tooltip="" href="index.php" title="Home">
@@ -57,29 +61,31 @@ require 'assets/php/session_check_p.php';
 		</div>
 	</nav>
 	<div class="container d-flex flex-column container-large">
-		<form>
 			<div class="form-row">
 				<div class="col">
 					<div id="right-solution-comment" class="description">
-						<h1>Somebody's solution title</h1>
-						<p>Somebody's solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or
-							comments. Somebody's solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small
-							description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's solution that can be
-							a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's solution
-							that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's
-							solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. Somebody's
-							solution that can be a normal big small description or comments. Somebody's solution that can be a normal big small description or comments. </p>
-						<p>Java / Hard</p>
+						<?php
+						if (isset($_GET['s'])) {
+							if (!selectSolution($connection, $_GET['s']))
+								header('Location: index.php?nosolution=1');
+						} else {
+							header('Location: index.php?nosolution=1');
+						}
+						?>
 					</div>
 				</div>
 				<div class="col">
 					<div id="solution-code">
-						<p class="best-solution-code">public class MyClass {<br><br> public static void main(String[] args) {<br> System.out.println("Hello World");<br> System.out.println("Hello World");<br> System.out.println("Hello World");<br> System.out.println("Hello
-							World");<br> }<br>}<br></p>
+						<p class="best-solution-code">
+							<?php
+							if (!empty($file)) {
+								printFile();
+							}
+							?>
+						</p>
 					</div>
 				</div>
 			</div>
-		</form>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
