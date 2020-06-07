@@ -6,7 +6,7 @@ var $ = function (id) {
 
 let forms;
 let timer;
-let jsonArrText = "";
+let jsonArr = {};
 
 window.addEventListener('load', function () {
 	forms = document.querySelectorAll("#solutions-container form");
@@ -18,8 +18,7 @@ var loadSolutions = function () {
 	change_formStyle(-1);
 	for (let i = 0; i < forms.length; i++) {
 		forms[i].addEventListener('submit', function (e) {
-			window.clearTimeout(timer);
-			switch (forms[i][0].value) {
+			switch (jsonArr[i].solution_state) {
 				case "0":
 					e.preventDefault();
 					solutionStatechange(i);
@@ -36,33 +35,33 @@ var loadSolutions = function () {
 					break;
 				default:
 					e.preventDefault();
-					console.warn("ERROR");
+					console.warn("ERROR: " + jsonArr[i].solution_state);
 					break;
 			}
 		});
 	}
-	timer = window.setTimeout(solutionsRefresh, 3000);
 };
+
 
 var change_formStyle = function (id) {
 	if (id == -1) {
 		for (let i = 0; i < forms.length; i++) {
-			switch (forms[i][0].value) {
+			switch (jsonArr[i].solution_state) {
 				case "0":
-					forms[i][1].innerHTML = "CHECK THIS";
-					forms[i][1].style.backgroundColor = "#d8a15a";
+					forms[i][0].innerHTML = "CHECK THIS";
+					forms[i][0].style.backgroundColor = "#d8a15a";
 					break;
 				case "1":
-					forms[i][1].innerHTML = "CHECKING";
-					forms[i][1].style.backgroundColor = "#d8a15a";
+					forms[i][0].innerHTML = "CHECKING";
+					forms[i][0].style.backgroundColor = "#d8a15a";
 					break;
 				case "2":
-					forms[i][1].innerHTML = "REMOVE";
-					forms[i][1].style.backgroundColor = "#f00";
+					forms[i][0].innerHTML = "REMOVE";
+					forms[i][0].style.backgroundColor = "#f00";
 					break;
 				case "3":
-					forms[i][1].innerHTML = "VIEW";
-					forms[i][1].style.backgroundColor = "#0f0";
+					forms[i][0].innerHTML = "VIEW";
+					forms[i][0].style.backgroundColor = "#0f0";
 					break;
 				default:
 					console.warn("ERROR");
@@ -72,22 +71,22 @@ var change_formStyle = function (id) {
 		}
 		jQuery('[data-bs-tooltip]').tooltip();
 	} else {
-		switch (forms[id][0].value) {
+		switch (jsonArr[id].solution_state) {
 			case "0":
-				forms[id][1].innerHTML = "CHECK THIS";
-				forms[id][1].style.backgroundColor = "#d8a15a";
+				forms[id][0].innerHTML = "CHECK THIS";
+				forms[id][0].style.backgroundColor = "#d8a15a";
 				break;
 			case "1":
-				forms[id][1].innerHTML = "CHECKING";
-				forms[id][1].style.backgroundColor = "#d8a15a";
+				forms[id][0].innerHTML = "CHECKING";
+				forms[id][0].style.backgroundColor = "#d8a15a";
 				break;
 			case "2":
-				forms[id][1].innerHTML = "REMOVE";
-				forms[id][1].style.backgroundColor = "#f00";
+				forms[id][0].innerHTML = "REMOVE";
+				forms[id][0].style.backgroundColor = "#f00";
 				break;
 			case "3":
-				forms[id][1].innerHTML = "VIEW";
-				forms[id][1].style.backgroundColor = "#0f0";
+				forms[id][0].innerHTML = "VIEW";
+				forms[id][0].style.backgroundColor = "#0f0";
 				break;
 			default:
 				console.warn("ERROR");
@@ -98,53 +97,58 @@ var change_formStyle = function (id) {
 };
 
 var solutionStatechange = function (id) {
-	forms[id][1].innerHTML = "WAIT";
-	forms[id][1].style.backgroundColor = "#ff0";
+	window.clearTimeout(timer);
+	forms[id][0].innerHTML = "WAIT";
+	forms[id][0].style.backgroundColor = "#ff0";
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
 			let rText = this.responseText;
 			if (rText == "0" || rText == "1" || rText == "3") {
-				forms[id][0].value = rText;
+				jsonArr[id].solution_state = rText;
 				change_formStyle(id);
 			} else if (rText == "2") {
-				show_toast(document.querySelector("#" + forms[id].id + " div p").innerHTML + " solution is removed!");
-				forms[id].innerHTML = "";
+				show_toast(jsonArr[id].firstname + " " + jsonArr[id].lastname + " solution is removed!");
+				jsonArr.splice(id, 1);
+				buildSolutionForms();
+				loadSolutions();
 			} else {
-				forms[id][1].innerHTML = "ERROR";
-				forms[id][1].style.backgroundColor = "#f00";
+				forms[id][0].innerHTML = "ERROR";
+				forms[id][0].style.backgroundColor = "#f00";
 				document.writeln(rText);
 			}
 			timer = window.setTimeout(solutionsRefresh, 3000);
 		} else {
-			forms[id][1].innerHTML = "WAIT";
-			forms[id][1].style.backgroundColor = "#ff0";
+			forms[id][0].innerHTML = "WAIT";
+			forms[id][0].style.backgroundColor = "#ff0";
 		}
 	};
-	xmlhttp.open("GET", "assets/php/solutions_p.php?ss=" + forms[id][1].value.trim(), true);
+	xmlhttp.open("GET", "assets/php/solutions_p.php?ss=" + jsonArr[id].id_solution, true);
 	xmlhttp.send();
 };
 
 var solutionsRefresh = function () {
+	window.clearTimeout(timer);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function () {
 		if (this.readyState == 4 && this.status == 200) {
 			let rText = this.responseText;
-			if (jsonArrText != rText) {
-				jsonArrText = rText;
-				let jsonObj = JSON.parse(jsonArrText);
-				buildSolutionForms(jsonObj);
+			if (JSON.stringify(jsonArr) != rText) {
+				console.log("NEM EGYENLŐ");
+				jsonArr = JSON.parse(rText);
+				buildSolutionForms();
 				loadSolutions();
 			} else {
-				timer = window.setTimeout(solutionsRefresh, 3000);
+				console.log("EGYENLŐ");
 			}
+			timer = window.setTimeout(solutionsRefresh, 3000);
 		}
 	};
 	xmlhttp.open("GET", "assets/php/solutions_p.php?cc=" + $('contest-id').innerHTML, true);
 	xmlhttp.send();
 };
 
-var buildSolutionForms = function (jsonArr) {
+var buildSolutionForms = function () {
 	let solutionFormsStr = "";
 	for (let j = 0; j < jsonArr.length; j++) {
 		solutionFormsStr +=
@@ -153,7 +157,6 @@ var buildSolutionForms = function (jsonArr) {
 				<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" id="full-name" title="Name">${jsonArr[j].firstname} ${jsonArr[j].lastname}</p>
 				<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Like">${jsonArr[j].likes}</p>
 				<p data-toggle="tooltip" data-bs-tooltip="" data-placement="left" title="Dislike">${jsonArr[j].dislikes}</p>
-				<input type="hidden" name="solution_state" id="ss_${jsonArr[j].id_solution}" value="${jsonArr[j].solution_state}">
 				<button class="btn btn-primary" type="submit" name="s" value="${jsonArr[j].id_solution}">CHECK THIS</button>
 			</div>
 			</form>`;
@@ -162,4 +165,5 @@ var buildSolutionForms = function (jsonArr) {
 	$('solutions-container').innerHTML = solutionFormsStr;
 
 };
+
 
