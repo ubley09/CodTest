@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 07, 2020 at 09:02 PM
+-- Generation Time: Jun 09, 2020 at 05:45 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -77,10 +77,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_solution` (`solution_descrip
 END$$
 
 DROP PROCEDURE IF EXISTS `new_user`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `new_user` (`username_p` VARCHAR(30), `password_p` VARCHAR(40), `firstname_p` VARCHAR(30), `lastname_p` VARCHAR(30), `email_p` VARCHAR(30))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `new_user` (`username_p` VARCHAR(30), `password_p` VARCHAR(40), `firstname_p` VARCHAR(30), `lastname_p` VARCHAR(30), `email_p` VARCHAR(30), `token_p` VARCHAR(40))  BEGIN
 
-	INSERT INTO users (username, password, firstname, lastname, email)
-		VALUES (username_p, password_p, firstname_p, lastname_p, email_p);
+	INSERT INTO users (username, password, firstname, lastname, email, verified, token)
+		VALUES (username_p, password_p, firstname_p, lastname_p, email_p, 0, token_p);
 
 	INSERT INTO ratings (likes, dislikes, id_user)
 			VALUES (0, 0, LAST_INSERT_ID());
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `contests` (
   `id_user` int(9) NOT NULL,
   PRIMARY KEY (`id_contest`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests`
@@ -156,7 +156,8 @@ INSERT INTO `contests` (`id_contest`, `title`, `description`, `language`, `diffi
 (16, 'Quisque et justo sapien', 'Praesent in scelerisque odio. Mauris ullamcorper mi sit amet ipsum interdum lobortis. Etiam neque ante, vestibulum a ligula eget, molestie scelerisque est. Morbi dignissim rutrum libero vitae vulputate. Aenean bibendum erat velit, sit amet fringilla sem elementum vitae. Aliquam ac neque finibus, sodales quam vitae, feugiat ante.', 'Java', 'Easy', 0, 5),
 (17, 'Nam eget orci tempus', 'Sed nec risus est. In pharetra urna vel ex egestas, eu pellentesque dolor dictum. Proin sit amet tincidunt eros, nec egestas justo. Vivamus id quam nec nunc pharetra cursus eu eu arcu. Morbi ac fringilla massa, ut placerat est. Nulla iaculis elit quis tincidunt faucibus. Donec est velit, malesuada ac quam eu, convallis faucibus quam. Sed dolor magna, aliquet non aliquam nec, tempus sit amet leo. Proin quis orci vulputate augue blandit euismod. Integer sodales efficitur justo a tristique. Praesent ut ligula ante. Morbi in est bibendum, luctus ipsum eget, pretium felis. In hac habitasse platea dictumst.', 'Java', 'Normal', 0, 5),
 (18, 'Suspendisse tempus magna sapien', 'In sit amet sodales diam. Sed ac felis quam. Etiam rutrum tortor aliquet ligula venenatis, vitae mattis tellus ultrices. Maecenas purus nunc, porta vel ipsum ac, molestie aliquet lacus. In venenatis aliquam risus in commodo. Suspendisse semper dignissim convallis. Praesent dictum pulvinar dolor, non fermentum sem. Proin pellentesque risus a mi volutpat, a scelerisque orci sollicitudin. Cras sed elit et mauris rutrum eleifend. Sed lacinia ex magna, nec sodales neque rutrum eget. Fusce ut pulvinar turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut consequat nisl eget tristique ultrices. Donec id dolor vitae mauris feugiat dapibus. Quisque ut rutrum nulla, eu condimentum nisl.', 'C#', 'Hard', 0, 5),
-(19, 'Nullam ac dolor egestas', 'Integer pulvinar odio nec nisi consequat, eget mattis dolor pulvinar. Aliquam nisl orci, commodo tincidunt ultrices sit amet, aliquam eget metus. Aliquam tristique eros et sem ullamcorper gravida. Nunc at elit metus. Quisque tempor risus in sem aliquet, sed ultrices massa cursus. Sed sed interdum mauris. Nullam sed consectetur tellus. Curabitur nec lacus in sapien molestie vulputate. Aliquam vestibulum congue luctus. Nulla efficitur maximus tellus, vitae fermentum ante vulputate a. Curabitur commodo nibh erat, maximus vehicula velit feugiat vel. Aenean ac rutrum justo.', 'C#', 'Easy', 0, 1);
+(19, 'Nullam ac dolor egestas', 'Integer pulvinar odio nec nisi consequat, eget mattis dolor pulvinar. Aliquam nisl orci, commodo tincidunt ultrices sit amet, aliquam eget metus. Aliquam tristique eros et sem ullamcorper gravida. Nunc at elit metus. Quisque tempor risus in sem aliquet, sed ultrices massa cursus. Sed sed interdum mauris. Nullam sed consectetur tellus. Curabitur nec lacus in sapien molestie vulputate. Aliquam vestibulum congue luctus. Nulla efficitur maximus tellus, vitae fermentum ante vulputate a. Curabitur commodo nibh erat, maximus vehicula velit feugiat vel. Aenean ac rutrum justo.', 'C#', 'Easy', 0, 1),
+(20, 'Print the Fibonacci sequence', 'Output:\r\n\r\nHow many terms? 7\r\nFibonacci sequence:\r\n0\r\n1\r\n1\r\n2\r\n3\r\n5\r\n8', 'Python', 'Normal', 0, 7);
 
 -- --------------------------------------------------------
 
@@ -183,7 +184,13 @@ INSERT INTO `ratings` (`likes`, `dislikes`, `id_user`) VALUES
 (0, 0, 3),
 (1, 0, 4),
 (5, 1, 5),
-(0, 0, 6);
+(0, 0, 6),
+(0, 0, 7),
+(1, 0, 8),
+(0, 0, 9),
+(0, 0, 10),
+(0, 0, 11),
+(0, 0, 12);
 
 -- --------------------------------------------------------
 
@@ -202,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `solutions` (
   PRIMARY KEY (`id_solution`),
   KEY `id_contest` (`id_contest`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `solutions`
@@ -217,14 +224,15 @@ INSERT INTO `solutions` (`id_solution`, `solution`, `solution_description`, `sol
 (6, 'code6.txt', 'Here is source code of the C# program which checks a given integer is odd or even. The C# program is successfully compiled and executed with Microsoft Visual Studio. The program output is also shown below.', 3, 7, 5),
 (7, 'code7.txt', 'Here is source code of the C# program that swaps two numbers. The C# program is successfully compiled and executed with Microsoft Visual Studio. The program output is also shown below.', 0, 12, 2),
 (8, 'code8.txt', 'Check whether an alphabet is vowel or consonant using switch statement\r\n\r\nWhen you run the program, the output will be:\r\n\r\nz is consonant\r\n\r\nIn the above program, instead of using a long if condition, we replace it with a switch case statement.\r\n\r\nIf ch is either of cases: (\'a\', \'e\', \'i\', \'o\', \'u\'), vowel is printed. Else, default case is executed and consonant is printed on the screen.', 0, 11, 2),
-(9, 'code9.txt', 'In this program, you\'ll learn to check if the given year is a leap year or not. This is checked using a if else statement.\r\n\r\nA leap year is exactly divisible by 4 except for century years (years ending with 00). The century year is a leap year only if it is perfectly divisible by 400.', 0, 6, 2),
+(9, 'code9.txt', 'In this program, you\'ll learn to check if the given year is a leap year or not. This is checked using a if else statement.\r\n\r\nA leap year is exactly divisible by 4 except for century years (years ending with 00). The century year is a leap year only if it is perfectly divisible by 400.', 1, 6, 2),
 (10, 'code10.txt', 'In this program, you\'ll learn to calculate the area of a triangle and display it.', 0, 14, 2),
 (11, 'code11.txt', 'In this program, you\'ll learn to find the largest among three numbers using if else and display it.\r\n\r\nIn the program below, the three numbers are stored in num1, num2 and num3 respectively. We\'ve used the if...elif...else ladder to find the largest among the three and display it.', 0, 15, 2),
 (12, 'code12.txt', 'Example to check whether an integer is a prime number or not using for loop and if...else statement. If the number is not prime, it\'s explained in output why it is not a prime number.\r\nA positive integer greater than 1 which has no other factors except 1 and the number itself is called a prime number. 2, 3, 5, 7 etc. are prime numbers as they do not have any other factors. But 6 is not prime (it is composite) since, 2 x 3 = 6.', 2, 5, 2),
 (13, 'code13.txt', 'Here is source code of the C# Program to Print a Binary Triangle. The C# program is successfully compiled and executed with Microsoft Visual Studio. The program output is also shown below.', 2, 2, 2),
 (14, 'code14.txt', 'In this program, you\'ll learn to find the factorial of a number using for and while loop in Java.\r\n\r\nThe factorial of a positive number n is given by:\r\n\r\nfactorial of n (n!) = 1 * 2 * 3 * 4 * ... * n\r\n', 3, 1, 2),
-(15, 'code15.txt', 'In this program, you\'ll learn to check whether a given number is armstrong number or not. You\'ll learn to do this by using a for loop and a while loop in Java.\r\n\r\nA positive integer is called an Armstrong number of order n if\r\n\r\nabcd... = an + bn + cn + dn + ...\r\n\r\nIn case of an Armstrong number of 3 digits, the sum of cubes of each digits is equal to the number itself. For example:\r\n\r\n153 = 1*1*1 + 5*5*5 + 3*3*3  // 153 is an Armstrong number.\r\n', 0, 1, 4),
-(16, 'code16.txt', 'In this program, you\'ll learn to convert octal number to a decimal number and vice-versa using functions in Java.\r\nWhen you run the program, the output will be:\r\n\r\n78 in decimal = 116 in octal\r\n\r\nThis conversion takes place as:\r\n\r\n8 | 78\r\n8 | 9 -- 6\r\n8 | 1 -- 1\r\n8 | 0 -- 1\r\n(116)\r\n', 0, 10, 1);
+(15, 'code15.txt', 'In this program, you\'ll learn to check whether a given number is armstrong number or not. You\'ll learn to do this by using a for loop and a while loop in Java.\r\n\r\nA positive integer is called an Armstrong number of order n if\r\n\r\nabcd... = an + bn + cn + dn + ...\r\n\r\nIn case of an Armstrong number of 3 digits, the sum of cubes of each digits is equal to the number itself. For example:\r\n\r\n153 = 1*1*1 + 5*5*5 + 3*3*3  // 153 is an Armstrong number.\r\n', 1, 1, 4),
+(16, 'code16.txt', 'In this program, you\'ll learn to convert octal number to a decimal number and vice-versa using functions in Java.\r\nWhen you run the program, the output will be:\r\n\r\n78 in decimal = 116 in octal\r\n\r\nThis conversion takes place as:\r\n\r\n8 | 78\r\n8 | 9 -- 6\r\n8 | 1 -- 1\r\n8 | 0 -- 1\r\n(116)\r\n', 0, 10, 1),
+(17, 'code17.txt', 'A Fibonacci sequence is the integer sequence of 0, 1, 1, 2, 3, 5, 8....\r\n\r\nThe first two terms are 0 and 1. All other terms are obtained by adding the preceding two terms. This means to say the nth term is the sum of (n-1)th and (n-2)th term.', 3, 20, 8);
 
 -- --------------------------------------------------------
 
@@ -240,20 +248,28 @@ CREATE TABLE IF NOT EXISTS `users` (
   `firstname` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `lastname` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `verified` tinyint(1) NOT NULL,
+  `token` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_user`, `username`, `password`, `firstname`, `lastname`, `email`) VALUES
-(1, 'Ubley', '369d7aeef623f225866af2f788a1d2b618a35b97', 'Robert', 'Kovac', 'robika09@gmail.com'),
-(2, 'Molly11', 'a10f67672cf81b27132e041d6ba32fdfcfd4d207', 'Molly', 'Solverson', 'MollyS@gmail.com'),
-(3, 'LMalvo11', '58e29df9be7c4addb2b0ea2a7332ced1902bdcbd', 'Lorne', 'Malvo', 'LorneM@gmail.com'),
-(4, 'Gus2014', '7929876655246e79c8b5ebcd583b56305fdf089a', 'Gus', 'Gimly', 'GusG@gmail.com'),
-(5, 'Lester2014', '532177130e35942b59c42c1ab37c0e4b6b8c06f7', 'Lester', 'Nygaard', 'LesterN@gmail.com'),
-(6, 'Lou10', '77405a9b72e176b28e5e574420e80b93dde4fd43', 'Lou', 'Solverson', 'LoutS@gmail.com');
+INSERT INTO `users` (`id_user`, `username`, `password`, `firstname`, `lastname`, `email`, `verified`, `token`) VALUES
+(1, 'Ubley', '369d7aeef623f225866af2f788a1d2b618a35b97', 'Robert', 'Kovac', 'robika09@gmail.com', 1, ''),
+(2, 'Molly11', 'a10f67672cf81b27132e041d6ba32fdfcfd4d207', 'Molly', 'Solverson', 'mollys@gmail.com', 1, ''),
+(3, 'LMalvo11', '58e29df9be7c4addb2b0ea2a7332ced1902bdcbd', 'Lorne', 'Malvo', 'lornem@gmail.com', 1, ''),
+(4, 'Gus2014', '7929876655246e79c8b5ebcd583b56305fdf089a', 'Gus', 'Gimly', 'gusg@gmail.com', 1, ''),
+(5, 'Lester2014', '532177130e35942b59c42c1ab37c0e4b6b8c06f7', 'Lester', 'Nygaard', 'lestern@gmail.com', 1, ''),
+(6, 'Lou10', '77405a9b72e176b28e5e574420e80b93dde4fd43', 'Lou', 'Solverson', 'louts@gmail.com', 1, ''),
+(7, 'ReganM', '9845113fa5d57d80dd7b498e5e062ecf9eba34f8', 'Regan', 'Morrow', 'regan@gmail.com', 1, ''),
+(8, 'Kalebk', '193d289853d9cc70130839dee19e9dc5768dc030', 'Kaleb', 'Kearns', 'kaleb@gmail.com', 1, ''),
+(9, 'EllenorI', 'e024b4e268a62638e96830123776f615e405eba8', 'Ellenor', 'Ingram', 'ellenor@gmail.com', 1, ''),
+(10, 'EmailTeszt', '369d7aeef623f225866af2f788a1d2b618a35b97', 'Teszt', 'Numberone', 'robika09@gmail.com', 0, '9f27cfbf8a7e241b7255dcb76dd1be548dac0821'),
+(11, 'KaiaW', '1fdade5a6d36848418727df78274e4a5c41f868d', 'Kaia', 'Ward', 'kaia@gmail.com', 1, '9dff4b519874958d7dc9790667638f219a2e2442'),
+(12, 'TianaC', '24f307cf30f87776967c348471d42dfac3f1a047', 'Tiana', 'Choi', 'tiana@gmail.com', 1, '32b36c7729696a3a582e0efe6ebd4c02feb6901b');
 
 --
 -- Constraints for dumped tables

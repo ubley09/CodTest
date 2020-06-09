@@ -2,11 +2,11 @@
 -- new_user
 DROP PROCEDURE IF EXISTS new_user;
 DELIMITER //
-CREATE PROCEDURE new_user(username_p VARCHAR(30), password_p VARCHAR(40), firstname_p VARCHAR(30), lastname_p VARCHAR(30), email_p VARCHAR(30))
+CREATE PROCEDURE new_user(username_p VARCHAR(30), password_p VARCHAR(40), firstname_p VARCHAR(30), lastname_p VARCHAR(30), email_p VARCHAR(30), token_p VARCHAR(40))
 BEGIN
 
-	INSERT INTO users (username, password, firstname, lastname, email)
-		VALUES (username_p, password_p, firstname_p, lastname_p, email_p);
+	INSERT INTO users (username, password, firstname, lastname, email, verified, token)
+		VALUES (username_p, password_p, firstname_p, lastname_p, email_p, 0, token_p);
 
 	INSERT INTO ratings (likes, dislikes, id_user)
 			VALUES (0, 0, LAST_INSERT_ID());
