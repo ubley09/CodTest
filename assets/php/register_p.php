@@ -38,7 +38,12 @@ function insertNewUserToSql($connection, $first_name, $last_name, $user_name, $e
 		define("SALT1", "X48z2dWpTSSm");
 		define("SALT2", "GB7tgL5GpLFS3jD");
 		$encPassword = sha1(SALT1 . $password . SALT2);
-		$token = sha1(generateRandomString(40));
+
+		$sql = "SELECT id_user FROM users ORDER BY id_user DESC LIMIT 1";
+		$result = mysqli_query($connection, $sql) or die(mysqli_error($connection));
+		$record = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		$token = sha1($record['id_user'] + 1 . generateRandomString(40));
+
 		$sql = "CALL new_user(\"$user_name\", \"$encPassword\", \"$first_name\", \"$last_name\", \"$email\", \"$token\")";
 		if (mysqli_query($connection, $sql)) {
 			if (!sendEmail($email, $token, $user_name, $password)) {
