@@ -12,7 +12,6 @@ window.addEventListener('load', function () {
 	$('isclosed-cb').addEventListener('click', function (e) {
 		e.preventDefault();
 		e.stopPropagation();
-
 		isClosedChange();
 	});
 	forms = document.querySelectorAll("#solutions-container form");
@@ -140,12 +139,10 @@ var solutionsRefresh = function () {
 		if (this.readyState == 4 && this.status == 200) {
 			let rText = this.responseText;
 			if (JSON.stringify(jsonArr) != rText) {
-				console.log("NEM EGYENLŐ");
 				jsonArr = JSON.parse(rText);
 				buildSolutionForms();
 				loadSolutions();
 			} else {
-				console.log("EGYENLŐ");
 			}
 			timer = window.setTimeout(solutionsRefresh, 3000);
 		}
@@ -166,10 +163,8 @@ var buildSolutionForms = function () {
 				<button class="btn btn-primary" type="submit" name="s" value="${jsonArr[j].id_solution}">CHECK THIS</button>
 			</div>
 			</form>`;
-
 	}
 	$('solutions-container').innerHTML = solutionFormsStr;
-
 };
 
 var isClosedChange = function () {
