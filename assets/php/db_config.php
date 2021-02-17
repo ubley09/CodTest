@@ -2,7 +2,7 @@
 
 define("HOST", "localhost");
 define("USER", "root");
-define("PASSWORD", "");
+define("PASSWORD", "8135");
 define("DATABASE", "codtest");
 
 $connection = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
